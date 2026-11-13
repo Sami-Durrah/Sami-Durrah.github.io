@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>سامي درة العمري | Portfolio</title>
+<meta name="description" content="معرض مشاريع برمجية: ذكاء اصطناعي، ويب، موبايل، وأنظمة.">
+<link href="assets/fonts/fonts.css" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f7fb; --surface: #ffffff; --surface-2: #f1f3f9; --line: #e3e7ef;
+    --text: #0f172a; --muted: #5b6478; --accent: #4f46e5; --accent-2: #0ea5e9;
+    --ok: #059669; --ok-bg: #dcfce7; --warn: #b45309; --warn-bg: #fef3c7; --bad: #be123c; --bad-bg: #ffe4e6;
+    --shadow: 0 10px 30px rgba(15, 23, 42, .07); --shadow-lg: 0 24px 60px rgba(15, 23, 42, .16);
+    --radius: 18px; color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0b1020; --surface: #121a2e; --surface-2: #18223a; --line: #24304d;
+      --text: #e6eaf3; --muted: #97a3bd; --accent: #8b85ff; --accent-2: #38bdf8;
+      --ok: #34d399; --ok-bg: rgba(52,211,153,.12); --warn: #fbbf24; --warn-bg: rgba(251,191,36,.12); --bad: #fb7185; --bad-bg: rgba(251,113,133,.12);
+      --shadow: 0 10px 30px rgba(0,0,0,.35); --shadow-lg: 0 24px 60px rgba(0,0,0,.55); color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0b1020; --surface: #121a2e; --surface-2: #18223a; --line: #24304d;
+    --text: #e6eaf3; --muted: #97a3bd; --accent: #8b85ff; --accent-2: #38bdf8;
+    --ok: #34d399; --ok-bg: rgba(52,211,153,.12); --warn: #fbbf24; --warn-bg: rgba(251,191,36,.12); --bad: #fb7185; --bad-bg: rgba(251,113,133,.12);
+    --shadow: 0 10px 30px rgba(0,0,0,.35); --shadow-lg: 0 24px 60px rgba(0,0,0,.55); color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif; line-height: 1.65; }
+  a { color: inherit; }
+  img { display: block; max-width: 100%; }
+  .wrap { width: min(1180px, 100% - 32px); margin-inline: auto; }
+
+  /* top bar */
+  .top { position: sticky; top: 0; z-index: 30; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; text-decoration: none; }
+  .brand .dot { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, var(--accent), var(--accent-2)); font-size: 16px; }
+  .top nav { display: flex; gap: 4px; flex-wrap: wrap; }
+  .top nav a, .theme-btn { text-decoration: none; padding: 7px 12px; border-radius: 10px; color: var(--muted); font-size: 14px; font-weight: 500; border: 0; background: none; cursor: pointer; font-family: inherit; }
+  .top nav a:hover, .theme-btn:hover { background: var(--surface-2); color: var(--text); }
+
+  /* hero */
+  .hero { padding: 64px 0 36px; }
+  .hero .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+  .hero .eyebrow i { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px var(--ok-bg); }
+  .hero h1 { font-size: clamp(32px, 5vw, 54px); line-height: 1.2; margin: 18px 0 12px; letter-spacing: -.5px; }
+  .hero h1 span { background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero p.lead { color: var(--muted); font-size: 18px; max-width: 720px; margin: 0 0 22px; }
+  .who { margin: 18px 0 0; font-size: 20px; font-weight: 700; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+  .who small { color: var(--muted); font-weight: 500; font-size: 15px; direction: ltr; }
+  .cta { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 26px; }
+  .cta a { flex: 0 1 auto; padding: 10px 16px; }
+  .btn.wa { background: #25d366; border-color: #25d366; color: #06290f; }
+  .btn.wa:hover { filter: brightness(1.05); }
+  .contact { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 26px; box-shadow: var(--shadow); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px; }
+  .contact h2 { margin: 0 0 4px; font-size: 24px; }
+  .contact p { margin: 0; color: var(--muted); }
+  .contact .num { direction: ltr; display: inline-block; font-weight: 700; color: var(--text); }
+  .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; max-width: 760px; }
+  .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; box-shadow: var(--shadow); }
+  .stat b { display: block; font-size: 26px; line-height: 1.1; }
+  .stat span { color: var(--muted); font-size: 13px; }
+
+  /* section heads */
+  section { padding: 26px 0; }
+  .head { display: flex; align-items: end; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+  .head h2 { margin: 0; font-size: 26px; }
+  .head p { margin: 4px 0 0; color: var(--muted); }
+
+
+  /* filters */
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+  .filter { border: 1px solid var(--line); background: var(--surface); color: var(--muted); padding: 8px 14px; border-radius: 999px; cursor: pointer; font: inherit; font-size: 14px; font-weight: 600; display: inline-flex; gap: 6px; align-items: center; }
+  .filter small { background: var(--surface-2); border-radius: 999px; padding: 0 7px; font-size: 12px; }
+  .filter[aria-pressed="true"] { background: var(--text); color: var(--bg); border-color: var(--text); }
+  .filter[aria-pressed="true"] small { background: color-mix(in srgb, var(--bg) 20%, transparent); }
+  .search { flex: 1 1 220px; max-width: 320px; }
+  .search input { width: 100%; padding: 9px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--text); font: inherit; font-size: 14px; }
+  .search input:focus { outline: 2px solid color-mix(in srgb, var(--accent) 40%, transparent); }
+
+  /* grid of cards */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 18px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; transition: transform .2s, box-shadow .2s; }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .card .shot { aspect-ratio: 16 / 10; background: var(--surface-2); overflow: hidden; border: 0; padding: 0; cursor: pointer; width: 100%; }
+  .card .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform .4s; }
+  .card .shot.contain img { object-fit: contain; padding: 16px; }
+  .card:hover .shot img { transform: scale(1.03); }
+  .card .body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .cat { font-size: 12px; font-weight: 700; color: var(--accent); }
+  .status { font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
+  .status.ok { color: var(--ok); background: var(--ok-bg); }
+  .status.partial { color: var(--warn); background: var(--warn-bg); }
+  .status.no { color: var(--bad); background: var(--bad-bg); }
+  .card h3 { margin: 0; font-size: 17.5px; line-height: 1.4; }
+  .card h3 small { display: block; color: var(--muted); font-weight: 500; font-size: 13px; direction: ltr; text-align: right; }
+  .card p { margin: 0; color: var(--muted); font-size: 14px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 6px; }
+  .tag { font-size: 12px; padding: 3px 9px; border-radius: 8px; background: var(--surface-2); color: var(--muted); direction: ltr; }
+  .actions { display: flex; gap: 8px; padding: 0 16px 16px; }
+  .btn { flex: 1; display: inline-flex; justify-content: center; align-items: center; gap: 6px; padding: 9px 12px; border-radius: 12px; font: inherit; font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer; border: 1px solid var(--line); background: var(--surface); color: var(--text); }
+  .btn:hover { background: var(--surface-2); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn.primary:hover { filter: brightness(1.08); }
+  .empty { grid-column: 1 / -1; text-align: center; color: var(--muted); padding: 40px; }
+
+  /* modal */
+  dialog { width: min(920px, 100% - 24px); max-height: calc(100vh - 32px); padding: 0; border: 0; border-radius: 22px; background: var(--surface); color: var(--text); box-shadow: var(--shadow-lg); }
+  dialog::backdrop { background: rgba(8, 12, 24, .6); backdrop-filter: blur(4px); }
+  .m-head { position: sticky; top: 0; z-index: 2; display: flex; align-items: start; justify-content: space-between; gap: 12px; padding: 18px 22px; background: var(--surface); border-bottom: 1px solid var(--line); }
+  .m-head h3 { margin: 0; font-size: 22px; }
+  .m-head h3 small { display: block; font-size: 14px; color: var(--muted); font-weight: 500; direction: ltr; text-align: right; }
+  .close { border: 1px solid var(--line); background: var(--surface-2); color: var(--text); width: 38px; height: 38px; border-radius: 12px; cursor: pointer; font-size: 18px; flex: none; }
+  .m-body { padding: 18px 22px 24px; display: grid; gap: 18px; }
+  .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .gallery img { width: 100%; border-radius: 14px; border: 1px solid var(--line); background: var(--surface-2); }
+  .m-body h4 { margin: 0 0 6px; font-size: 16px; }
+  .m-body ul { margin: 0; padding-inline-start: 20px; color: var(--muted); }
+  .m-body ul li { margin: 3px 0; }
+  .note { border-radius: 14px; padding: 12px 14px; font-size: 14px; }
+  .note.ok { background: var(--ok-bg); color: var(--ok); }
+  .note.partial { background: var(--warn-bg); color: var(--warn); }
+  .note.no { background: var(--bad-bg); color: var(--bad); }
+  .cmd { display: flex; align-items: center; gap: 8px; direction: ltr; background: #0b1020; color: #e6eaf3; border-radius: 12px; padding: 10px 12px; font-family: Consolas, "Cascadia Mono", monospace; font-size: 13.5px; overflow-x: auto; }
+  .cmd code { flex: 1; white-space: nowrap; }
+  .copy { border: 1px solid #2c3757; background: #18223a; color: #e6eaf3; border-radius: 8px; padding: 4px 10px; cursor: pointer; font-family: inherit; font-size: 12px; }
+  .m-links { display: flex; gap: 10px; flex-wrap: wrap; }
+  .m-links .btn { flex: 0 1 auto; }
+
+  footer { border-top: 1px solid var(--line); margin-top: 30px; padding: 26px 0 40px; color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+  @media (max-width: 860px) {
+    .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 560px) {
+    .top nav a.hide-sm { display: none; }
+    .hero { padding-top: 40px; }
+    .hero p.lead { font-size: 16px; }
+    .grid { grid-template-columns: 1fr; }
+    .search { max-width: none; }
+  }
+</style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="#"><span class="dot">&lt;/&gt;</span><span>سامي العمري</span></a>
+      <nav>
+        <a href="#projects">كل المشاريع</a>
+        <a href="#contact">تواصل</a>
+        <button class="theme-btn" id="theme" type="button" aria-label="تبديل الوضع الليلي"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <span class="eyebrow"><i></i> مشاريع عملية في الذكاء الاصطناعي والويب والموبايل</span>
+      <p class="who">أنا سامي درة العمري <small>Sami Durrah AlOmari</small></p>
+      <h1>أبني حلول <span>ذكاء اصطناعي</span> وتطبيقات ويب وموبايل</h1>
+      <p class="lead">مجموعة من مشاريعي البرمجية: نماذج تعلّم عميق وتعلّم آلي، وأنظمة إدارة مبنية بـ Laravel و Spring Boot، وتطبيقات Flutter و React Native. لكل مشروع صفحة تفاصيل ولقطات شاشة.</p>
+      <div class="cta">
+        <a class="btn wa" href="https://wa.me/963985197641" target="_blank" rel="noopener">واتساب</a>
+        <a class="btn" href="tel:+963985197641">اتصال</a>
+        <a class="btn" href="#projects">استعرض المشاريع</a>
+      </div>
+      <div class="stats" id="stats"></div>
+    </section>
+
+    <section id="projects">
+      <div class="head">
+        <div><h2>كل المشاريع</h2><p>اختر تصنيفاً، أو ابحث بالاسم أو التقنية.</p></div>
+        <div class="search"><input id="q" type="search" placeholder="ابحث: Flutter، CNN، Laravel…" aria-label="بحث"></div>
+      </div>
+      <div class="filters" id="filters" role="group" aria-label="تصنيفات"></div>
+      <div style="height:16px"></div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <section id="contact">
+      <div class="contact">
+        <div>
+          <h2>تواصل معي</h2>
+          <p>للتواصل عبر واتساب أو الهاتف: <span class="num">0985 197 641</span></p>
+        </div>
+        <div class="cta" style="margin:0">
+          <a class="btn wa" href="https://wa.me/963985197641" target="_blank" rel="noopener">راسلني على واتساب</a>
+          <a class="btn" href="tel:+963985197641">اتصل</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© 2026 — سامي درة العمري · Sami Durrah AlOmari</span>
+      <span>الكود المصدري لكل مشروع متوفر عند الطلب.</span>
+    </div>
+  </footer>
+
+  <dialog id="modal" aria-labelledby="mTitle">
+    <div class="m-head">
+      <h3 id="mTitle"></h3>
+      <button class="close" type="button" aria-label="إغلاق" onclick="document.getElementById('modal').close()">×</button>
+    </div>
+    <div class="m-body" id="mBody"></div>
+  </dialog>
+
+<script>
+const CATS = { ai: "ذكاء اصطناعي", web: "ويب", mobile: "موبايل", other: "أنظمة وغيرها" };
+const STATUS = { ok: "شغّال", partial: "يعمل جزئياً", no: "يحتاج إعداد" };
+
+const PROJECTS = [
+  {
+    id: "waste", dir: "NN-Waste-Classification", cat: "ai", status: "ok",
+    title: "تصنيف النفايات بشبكة CNN", en: "Waste Classification CNN",
+    short: "شبكة عصبية تلافيفية (CNN) تصنّف صور النفايات إلى عضوية أو قابلة لإعادة التدوير، بدقة اختبار 91.3% وقيمة AUC تبلغ 0.97.",
+    tags: ["Python", "TensorFlow", "Keras", "CNN", "Streamlit"],
+    shots: ["screenshots/ui.jpg", "screenshots/waste_2.png"],
+    points: ["تدريب على 24,705 صورة موزعة على صنفين خلال 20 دورة تدريب", "تقييم باستخدام مصفوفة الالتباس ومنحنى ROC", "واجهة Streamlit تتيح رفع صورة والحصول على التصنيف ونسبة الثقة باستخدام النموذج المدرّب"],
+  },
+  {
+    id: "storemgmt", dir: "Store-Management-System", cat: "web", status: "ok",
+    title: "نظام إدارة المتاجر المتكامل", en: "Integrated Store Management System",
+    short: "نظام ويب متكامل يضم أربع وحدات مترابطة: الموارد البشرية، والمنتجات، والمستودعات والمتاجر، والزبائن وعروض VIP، بتصميم داكن موحّد.",
+    tags: ["PHP", "Laravel", "Blade", "Bootstrap 5.3", "Eloquent", "SQLite"],
+    shots: ["screenshots/hr-dashboard.jpg", "screenshots/products.jpg", "screenshots/warehouses.jpg", "screenshots/customers.jpg"],
+    points: ["ربط المنتجات بالمستودعات والمتاجر بعلاقات كثير لكثير، ولكل مستودع مدير من الموظفين", "صلاحيات مدير وموظف عبر Middleware، وتسجيل دخول قائم على الجلسات", "قالب موحّد وشريط جانبي للتنقل بين الوحدات الأربع", "Migrations و Seeders مع بيانات تجريبية واقعية"],
+  },
+  {
+    id: "kafaa", dir: "Kafaa-Careers-App", cat: "mobile", status: "no",
+    title: "كفاءة — منصة المواهب والوظائف", en: "Kafa’a Careers App",
+    short: "تطبيق Flutter يربط الباحثين عن عمل والمستقلين والخبراء بالشركات، ويشمل الوظائف والسير الذاتية والمحادثات والمكالمات والحجوزات.",
+    tags: ["Flutter", "Dart", "BLoC", "Clean Architecture", "Firebase", "LiveKit"],
+    shots: ["screenshots/icon.png", "screenshots/brand.png"], contain: true,
+    points: ["أكثر من 450 ملف Dart مبنية وفق معمارية Clean Architecture ونمط BLoC", "اختبارات وحدات وتكامل باستخدام mocktail و bloc_test", "إشعارات عبر Firebase ومكالمات صوت وفيديو عبر LiveKit"],
+  },
+  {
+    id: "adtext", dir: "Ad-Text-Generation-NLP", cat: "ai", status: "ok",
+    title: "توليد نصوص إعلانية بنماذج اللغة", en: "Ad Copy Generation · GPT-2",
+    short: "نموذج GPT-2 مضبوط (Fine-tuned) على بيانات إعلانات حقيقية، يكتب نصاً إعلانياً كاملاً انطلاقاً من وصف قصير للمنتج، مع مقارنة تجريبية بنموذجي T5 و BERT.",
+    tags: ["PyTorch", "Transformers", "NLP", "Streamlit"],
+    shots: ["screenshots/ui.jpg", "screenshots/exp1_1.png"],
+    points: ["خط معالجة نصوص متكامل (تنظيف، و Lemmatization، ومعالجة الرموز التعبيرية)", "مقارنة GPT-2 و T5 و BERT بمقاييس ROUGE و BLEU و BERTScore", "واجهة Streamlit تولّد حتى ثلاث صيغ إعلانية من وصف واحد"],
+  },
+  {
+    id: "kbs", dir: "Knowledge-Based-Systems", cat: "ai", status: "ok",
+    title: "الأنظمة القائمة على المعرفة", en: "Knowledge-Based Systems",
+    short: "تطبيقات لطرق تمثيل المعرفة: أنطولوجيا RDF مع استعلامات SPARQL، وإطارات (Frames) مع الوراثة، وشبكة دلالية، وتمثيل كائني، ضمن واجهة تفاعلية.",
+    tags: ["Python", "rdflib", "SPARQL", "networkx", "Streamlit"],
+    shots: ["screenshots/ui.jpg"],
+    points: ["ستة استعلامات جاهزة، منها استدلال RDFS عبر subClassOf", "استعراض الإطارات وما ترثه من الإطار الأب", "رسم تفاعلي للشبكة الدلالية"],
+  },
+  {
+    id: "lamha", dir: "Lamha-Delivery-App", cat: "mobile", status: "ok",
+    title: "لمحة — تطبيق توصيل", en: "Lamha Delivery App",
+    short: "تطبيق توصيل بثلاث واجهات (زبون، وكابتن، وتاجر)، يتضمن التحقق برمز OTP، وتتبّع الطلبات، والمحفظة، ومسح رموز QR، بواجهة عربية.",
+    tags: ["React Native", "Expo", "TypeScript", "Expo Router"],
+    shots: ["screenshots/ui.jpg"], phone: true,
+    points: ["توجيه قائم على الملفات (Expo Router) لكل دور", "تسجيل الكابتن على ثلاث مراحل", "يعمل على الأجهزة المحمولة وعلى الويب"],
+  },
+  {
+    id: "dscc", dir: "DSCC-Microservices", cat: "other", status: "ok",
+    title: "نظام خدمات مصغّرة (Microservices)", en: "DSCC Microservices · Spring Boot",
+    short: "نظام قائم على الخدمات المصغّرة يضم خدمتي الطلاب والمواد، وبوابة API، وخادم اكتشاف Eureka، وخدمة مراقبة، مع لوحة تحكم ويب.",
+    tags: ["Java 17", "Spring Boot", "Spring Cloud", "Eureka", "Gateway"],
+    shots: ["screenshots/ui.jpg"],
+    points: ["اتصال بين الخدمات عبر Load Balancer و Eureka", "توجيه الطلبات من خلال Spring Cloud Gateway", "لوحة تحكم لإضافة البيانات وعرضها واستعراض التفاصيل"],
+  },
+  {
+    id: "hospital", dir: "Hospital-Management-System", cat: "other", status: "ok",
+    title: "نظام إدارة مستشفى", en: "Hospital Management · Tkinter",
+    short: "تطبيق سطح مكتب لإدارة الأطباء والمرضى، يتضمن الصلاحيات والتحقق من المدخلات وتصدير التقارير بصيغتي PDF و Excel.",
+    tags: ["Python", "Tkinter", "SQLite", "FPDF", "pandas"],
+    shots: ["screenshots/main.png", "screenshots/login.png"],
+    points: ["دوران للمستخدم (مدير وطبيب) مع حد أقصى لعدد المرضى لكل طبيب", "بحث وإحصائيات وتعديل وحذف للسجلات", "تصدير التقارير إلى PDF و Excel"],
+  },
+  {
+    id: "movies", dir: "Movies-Website", cat: "web", status: "ok",
+    title: "MoviesNook — موقع أفلام", en: "MoviesNook",
+    short: "موقع أفلام بتصميم سينمائي داكن، يتضمن فيلماً مميزاً، والبحث والتصنيف، وتسجيل الدخول وإنشاء الحساب، ولوحة إدارة لإضافة الأفلام.",
+    tags: ["HTML", "CSS", "JavaScript"],
+    shots: ["screenshots/ui.jpg", "screenshots/grid.jpg", "screenshots/mobile.jpg"],
+    points: ["تصميم متجاوب مع شاشات الهواتف", "تصفية حسب التصنيف وبحث بالاسم", "لوحة إدارة تحفظ الأفلام باستخدام localStorage"],
+    live: "Movies-Website/index.html",
+  },
+];
+
+const $ = (s) => document.querySelector(s);
+const esc = (v) => String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const shot = (p, i = 0) => `${p.dir}/${p.shots[i]}`;
+
+// stats
+const count = (cat) => PROJECTS.filter((p) => p.cat === cat).length;
+$("#stats").innerHTML = [
+  [PROJECTS.length, "مشروع"], [count("ai"), "ذكاء اصطناعي"], [count("web"), "ويب"],
+  [count("mobile"), "موبايل"],
+].map(([n, l]) => `<div class="stat"><b>${n}</b><span>${l}</span></div>`).join("");
+
+// filters
+let current = "all";
+const filterDefs = [["all", "الكل", PROJECTS.length], ...Object.entries(CATS).map(([k, v]) => [k, v, count(k)])];
+$("#filters").innerHTML = filterDefs.map(([k, l, n]) =>
+  `<button class="filter" type="button" data-cat="${k}" aria-pressed="${k === "all"}">${l} <small>${n}</small></button>`).join("");
+$("#filters").addEventListener("click", (e) => {
+  const b = e.target.closest(".filter"); if (!b) return;
+  current = b.dataset.cat;
+  document.querySelectorAll(".filter").forEach((x) => x.setAttribute("aria-pressed", x === b));
+  render();
+});
+$("#q").addEventListener("input", render);
+
+function card(p) {
+  return `
+  <article class="card">
+    <button class="shot${p.contain ? " contain" : ""}" type="button" data-id="${p.id}" aria-label="تفاصيل ${esc(p.title)}">
+      <img src="${esc(shot(p))}" alt="${esc(p.title)}" loading="lazy">
+    </button>
+    <div class="body">
+      <div class="meta"><span class="cat">${CATS[p.cat]}</span></div>
+      <h3>${esc(p.title)}<small>${esc(p.en)}</small></h3>
+      <p>${esc(p.short)}</p>
+      <div class="tags">${p.tags.map((t) => `<span class="tag">${esc(t)}</span>`).join("")}</div>
+    </div>
+    <div class="actions">
+      <button class="btn primary" type="button" data-id="${p.id}">التفاصيل</button>
+      ${p.live ? `<a class="btn" href="${esc(p.live)}" target="_blank" rel="noopener">افتح</a>` : ""}
+    </div>
+  </article>`;
+}
+
+function render() {
+  const q = $("#q").value.trim().toLowerCase();
+  const list = PROJECTS.filter((p) => (current === "all" || p.cat === current) &&
+    (!q || [p.title, p.en, p.short, ...p.tags].join(" ").toLowerCase().includes(q)));
+  $("#grid").innerHTML = list.length ? list.map(card).join("") : `<p class="empty">لا توجد نتائج.</p>`;
+}
+render();
+
+// modal
+document.addEventListener("click", (e) => {
+  const t = e.target.closest("[data-id]"); if (!t || t.closest("dialog")) return;
+  open(PROJECTS.find((p) => p.id === t.dataset.id));
+});
+function open(p) {
+  $("#mTitle").innerHTML = `${esc(p.title)}<small>${esc(p.en)}</small>`;
+  $("#mBody").innerHTML = `
+    <div class="gallery">${p.shots.map((s, i) => `<img src="${esc(shot(p, i))}" alt="" loading="lazy" style="${p.contain ? "object-fit:contain;padding:14px" : ""}${p.phone ? ";max-width:320px" : ""}">`).join("")}</div>
+    <div><h4>عن المشروع</h4><p style="margin:0;color:var(--muted)">${esc(p.short)}</p></div>
+    <div><h4>أبرز النقاط</h4><ul>${p.points.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>
+    <div><h4>التقنيات</h4><div class="tags">${p.tags.map((t) => `<span class="tag">${esc(t)}</span>`).join("")}</div></div>
+    <div class="m-links">
+      ${p.live ? `<a class="btn primary" href="${esc(p.live)}" target="_blank" rel="noopener">افتح المشروع</a>` : ""}
+    </div>`;
+  const dlg = $("#modal");
+  dlg.showModal(); dlg.scrollTop = 0;
+}
+$("#modal").addEventListener("click", (e) => {
+  if (e.target.id === "modal") e.target.close();                  // click on backdrop
+  const c = e.target.closest(".copy"); if (!c) return;
+  navigator.clipboard?.writeText(c.dataset.copy).then(() => { c.textContent = "تم النسخ"; setTimeout(() => (c.textContent = "نسخ"), 1400); })
+    .catch(() => { c.textContent = "انسخ يدوياً"; });
+});
+
+// theme toggle (remembered per browser)
+const root = document.documentElement;
+try { const saved = localStorage.getItem("pf-theme"); if (saved) root.dataset.theme = saved; } catch {}
+$("#theme").addEventListener("click", () => {
+  const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  root.dataset.theme = dark ? "light" : "dark";
+  try { localStorage.setItem("pf-theme", root.dataset.theme); } catch {}
+});
+</script>
+</body>
+</html>

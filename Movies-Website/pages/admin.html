@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../assets/logo/logo.png" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <title>MoviesNook — Admin</title>
+  </head>
+  <body>
+    <header class="nav">
+      <a class="logo" href="../index.html"><span class="mark">M</span><span>MOVIES<span class="nook">NOOK</span></span></a>
+      <nav class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="movies.html">Movies</a>
+        <a class="active" href="admin.html">Admin</a>
+      </nav>
+    </header>
+
+    <div class="admin">
+      <form class="panel" id="form">
+        <h2>Film management</h2>
+        <div class="field"><label for="title">Film title</label><input id="title" required placeholder="e.g. Inception" /></div>
+        <div class="two">
+          <div class="field"><label for="year">Year</label><input id="year" type="number" min="1900" max="2100" required placeholder="2024" /></div>
+          <div class="field"><label for="genre">Genre</label>
+            <select id="genre"><option>Action</option><option>Drama</option><option>Sci-Fi</option><option>Thriller</option><option>Comedy</option></select>
+          </div>
+        </div>
+        <div class="field"><label for="desc">Description</label><textarea id="desc" rows="3" placeholder="Short description"></textarea></div>
+        <div class="field"><label for="price">Price ($)</label><input id="price" type="number" step="0.01" min="0" required placeholder="3.99" /></div>
+        <button class="btn block" type="submit">Add film</button>
+        <div class="msg" id="msg"></div>
+      </form>
+
+      <section class="panel">
+        <h2>Current movies</h2>
+        <div class="stats">
+          <div class="stat"><b id="s-total">0</b><span>Total films</span></div>
+          <div class="stat"><b id="s-custom">0</b><span>Added by you</span></div>
+          <div class="stat"><b id="s-avg">$0</b><span>Avg. price</span></div>
+        </div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr><th></th><th>Title</th><th>Year</th><th>Genre</th><th>Price</th><th></th></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <script src="../assets/movies.js"></script>
+    <script>
+      const rows = document.getElementById("rows");
+      function refresh() {
+        const list = allMovies(), custom = loadCustom();
+        rows.innerHTML = list.map((m) => `
+          <tr>
+            <td><img class="thumb" src="${esc(posterSrc(m))}" alt=""></td>
+            <td><b>${esc(m.title)}</b></td><td>${esc(m.year)}</td><td>${esc(m.genre)}</td>
+            <td class="price">$${esc(Number(m.price).toFixed(2))}</td>
+            <td>${custom.some((c) => c.id === m.id) ? `<button class="del" data-id="${esc(m.id)}">Delete</button>` : ""}</td>
+          </tr>`).join("");
+        document.getElementById("s-total").textContent = list.length;
+        document.getElementById("s-custom").textContent = custom.length;
+        document.getElementById("s-avg").textContent = "$" + (list.reduce((s, m) => s + Number(m.price), 0) / list.length).toFixed(2);
+      }
+      document.getElementById("form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const f = e.target, msg = document.getElementById("msg");
+        if (!f.checkValidity()) { msg.className = "msg show err"; msg.textContent = "Title, year and price are required."; return; }
+        const custom = loadCustom();
+        custom.push({ id: "c" + Date.now(), title: f.title.value.trim(), year: Number(f.year.value), genre: f.genre.value, price: Number(f.price.value), desc: f.desc.value.trim() });
+        saveCustom(custom); f.reset(); refresh();
+        msg.className = "msg show"; msg.textContent = "Film added — it now appears on the Home and Movies pages.";
+      });
+      rows.addEventListener("click", (e) => {
+        const b = e.target.closest(".del"); if (!b) return;
+        saveCustom(loadCustom().filter((m) => m.id !== b.dataset.id)); refresh();
+      });
+      refresh();
+    </script>
+  </body>
+</html>

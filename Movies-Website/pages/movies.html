@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../assets/logo/logo.png" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <title>MoviesNook — Movies</title>
+  </head>
+  <body>
+    <header class="nav">
+      <a class="logo" href="../index.html"><span class="mark">M</span><span>MOVIES<span class="nook">NOOK</span></span></a>
+      <nav class="nav-links">
+        <a href="../index.html">Home</a>
+        <a class="active" href="movies.html">Movies</a>
+        <a href="admin.html">Admin</a>
+        <a href="login.html">Login</a>
+        <a class="cta" href="signup.html">Sign up</a>
+      </nav>
+    </header>
+
+    <main class="section">
+      <div class="section-head">
+        <h2>All <span>movies</span></h2>
+        <div class="field" style="margin:0;min-width:240px">
+          <input id="q" type="search" placeholder="Search by title…" aria-label="Search movies" />
+        </div>
+      </div>
+      <div class="chips" id="chips" style="margin-bottom:18px"></div>
+      <div class="grid" id="grid"></div>
+    </main>
+
+    <footer>© MoviesNook — prices are demo values</footer>
+
+    <script src="../assets/movies.js"></script>
+    <script>
+      const grid = document.getElementById("grid");
+      setupFilters(document.getElementById("chips"), grid, true);
+      document.getElementById("q").addEventListener("input", (e) => {
+        const q = e.target.value.trim().toLowerCase();
+        document.querySelectorAll("#chips .chip").forEach((c, i) => c.classList.toggle("active", i === 0));
+        renderGrid(grid, allMovies().filter((m) => m.title.toLowerCase().includes(q)), true);
+      });
+      grid.addEventListener("click", (e) => {
+        const b = e.target.closest(".icon-btn"); if (!b) return;
+        b.textContent = "Added"; b.disabled = true;
+      });
+    </script>
+  </body>
+</html>

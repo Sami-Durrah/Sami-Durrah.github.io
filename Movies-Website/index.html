@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="assets/logo/logo.png" />
+    <link rel="stylesheet" href="assets/style.css" />
+    <title>MoviesNook — Home</title>
+  </head>
+  <body>
+    <header class="nav">
+      <a class="logo" href="index.html"><span class="mark">M</span><span>MOVIES<span class="nook">NOOK</span></span></a>
+      <nav class="nav-links">
+        <a class="active" href="index.html">Home</a>
+        <a href="pages/movies.html">Movies</a>
+        <a href="pages/admin.html">Admin</a>
+        <a href="pages/login.html">Login</a>
+        <a class="cta" href="pages/signup.html">Sign up</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <img class="bg" src="assets/posters/avatar-the-way-of-water.jpg" alt="Avatar: The Way of Water" />
+      <div class="content">
+        <span class="badge">FEATURED · SCI-FI · 2022</span>
+        <h1>Avatar: The Way of Water</h1>
+        <p>Your next movie night starts here. Browse the latest blockbusters, rent in one click, and watch anywhere.</p>
+        <a class="btn" href="pages/movies.html">Browse movies</a>
+        <a class="btn ghost" href="pages/signup.html">Create account</a>
+      </div>
+    </section>
+
+    <main class="section">
+      <div class="section-head">
+        <h2>Trending <span>now</span></h2>
+        <div class="chips" id="chips"></div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </main>
+
+    <footer>© MoviesNook — a student web project (HTML · CSS · JavaScript)</footer>
+
+    <script src="assets/movies.js"></script>
+    <script>setupFilters(document.getElementById("chips"), document.getElementById("grid"), false);</script>
+  </body>
+</html>
